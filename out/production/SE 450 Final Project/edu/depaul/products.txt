@@ -1,0 +1,11 @@
+1,car,15000
+2,computer,1000
+3,phone,750
+4,water bottle,1.50
+5,shirt,20
+6,pants,30
+7,shoes,25
+8,hat,10
+9,backpack,35
+10,headphones,75
+11,camera,500
