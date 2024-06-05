@@ -21,4 +21,9 @@ public class WaterBottle implements Product {
     public String getItemName() {
         return this.name;
     }
+
+    @Override
+    public double getItemPrice() {
+        return this.price;
+    }
 }

@@ -10,25 +10,54 @@ public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
+        System.out.println("Welcome to our shopping system for SE450! Please log in before accessing the system.");
+
         // initialize UserAuthenticationSystem, ProductCatalog
 
         UserAuthenticationSystem userAuthenticationSystem = new UserAuthenticationSystem();
         ProductCatalog productCatalog = new ProductCatalog();
 
         // prompt for user login
-
-        // temp, for now
-        String enteredUsername = "test";
-        String enteredPassword = "test";
-
         boolean isValidLogin = false;
 
         while (isValidLogin != true) {
-            if (userAuthenticationSystem.authenticateUser(enteredUsername, enteredPassword)) {
-                System.out.println("Authentication successful!");
+            System.out.println("Select an option:");
+            System.out.println("1. Existing user");
+            System.out.println("2. New user");
+
+            int userChoice = scanner.nextInt();
+
+            if (userChoice < 1 || userChoice > 2) {
+                System.out.println("Error: Invalid option selected. Please either 1 for existing user or 2 for new user.");
+                continue;
+            }
+
+            if (userChoice == 1) {
+                System.out.println("Existing user login");
+                System.out.println("Enter username:");
+                String enteredUsername = scanner.next();
+
+                System.out.println("Enter password:");
+                String enteredPassword = scanner.next();
+
+                if (userAuthenticationSystem.authenticateUser(enteredUsername, enteredPassword)) {
+                    System.out.println("Authentication successful!");
+                    isValidLogin = true;
+                } else {
+                    System.out.println("Authentication failed. Invalid username or password.");
+                }
+            }
+            else {
+                System.out.println("New user registration");
+                System.out.println("Enter username:");
+                String enteredUsername = scanner.next();
+
+                System.out.println("Enter password:");
+                String enteredPassword = scanner.next();
+
+                userAuthenticationSystem.addUser(enteredUsername, enteredPassword);
+
                 isValidLogin = true;
-            } else {
-                System.out.println("Authentication failed. Invalid username or password.");
             }
         }
 
@@ -74,7 +103,9 @@ public class Main {
                     removeItemFromCart(scanner);
                     break;
                 case 5:
+                    // Place Order
                     System.out.println("You selected option 5: Place Order");
+                    placeOrder(scanner);
                     break;
                 case 6:
                     System.out.println("You selected option 6: Quit");
@@ -108,7 +139,8 @@ public class Main {
         ShoppingCartManager shoppingCartManager = ShoppingCartManager.getInstance();
         ShoppingCartBuilder shoppingCartBuilder = shoppingCartManager.getShoppingCartBuilder();
         // Prompt user to select product id to add
-        System.out.println("\n Enter the Product ID number (1-11)");
+        System.out.println("\n Add Item to Cart");
+        System.out.println("Enter the Product ID number (1-11):");
 
         int userItemId = scanner.nextInt();
 
@@ -129,6 +161,41 @@ public class Main {
     }
 
     private static void removeItemFromCart(Scanner scanner) {
+        ShoppingCartManager shoppingCartManager = ShoppingCartManager.getInstance();
+        ShoppingCartBuilder shoppingCartBuilder = shoppingCartManager.getShoppingCartBuilder();
+        // Prompt user to select product id to remove
+        System.out.println("\n Remove Item from Cart");
+        System.out.println("Enter the Product ID number (1-11):");
+
+        int userItemId = scanner.nextInt();
+
+        if (userItemId > 11 || userItemId < 1) {
+            System.out.println("Error: Invalid Product ID. No item was removed from cart.");
+            return;
+        }
+
+        shoppingCartBuilder.removeItem(userItemId);
+
+        System.out.println("Item Removed (if present in Cart).");
+    }
+
+    private static void placeOrder(Scanner scanner) {
+        ShoppingCartManager shoppingCartManager = ShoppingCartManager.getInstance();
+        ShoppingCartBuilder shoppingCartBuilder = shoppingCartManager.getShoppingCartBuilder();
+
+        System.out.println("\n Place Order");
+        System.out.println("Enter Customer Name (press Enter when finished): ");
+
+        String customerName = scanner.nextLine();
+
+        System.out.println("Enter Shipping Address (press Enter when finished):");
+
+        String shippingAddress = scanner.nextLine();
+
+        shoppingCartBuilder.setCustomerInfo(customerName, shippingAddress);
+
+        shoppingCartBuilder.finalizeOrder();
+
     }
 
 }

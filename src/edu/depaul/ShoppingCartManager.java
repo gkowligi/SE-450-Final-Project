@@ -1,10 +1,5 @@
 package edu.depaul;
 
-import edu.depaul.Products.Product;
-
-import java.util.ArrayList;
-import java.util.List;
-
 public class ShoppingCartManager {
 
     private static ShoppingCartManager instance;

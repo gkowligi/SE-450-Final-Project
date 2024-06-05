@@ -1,8 +1,13 @@
 package edu.depaul;
 
+import edu.depaul.Products.Pants;
+
 import java.io.BufferedReader;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -38,5 +43,18 @@ public class UserAuthenticationSystem {
             }
         }
         return false; // Authentication failed
+    }
+
+    public void addUser(String username, String password) {
+        String userToAdd = '\n' + username + ',' + password;
+        try {
+            FileWriter writer = new FileWriter(USERS_FILE_PATH); // Specify the file name
+            writer.write(userToAdd);
+            writer.close(); // Close the writer to save changes
+            System.out.println("Successfully added new user.");
+        } catch (IOException e) {
+            System.out.println("An error occurred while writing to the file.");
+            e.printStackTrace();
+        }
     }
 }

@@ -21,4 +21,9 @@ public class Car implements Product {
     public String getItemName() {
         return this.name;
     }
+
+    @Override
+    public double getItemPrice() {
+        return this.price;
+    }
 }
