@@ -28,8 +28,8 @@ public class ShoppingCartBuilder {
         return this;
     }
 
-    public ShoppingCartBuilder setCustomerInfo(String name, String address) {
-        this.customerName = name;
+    public ShoppingCartBuilder setCustomerInfo(String firstName, String lastName, String address) {
+        this.customerName = firstName + " " + lastName;
         this.shippingAddress = address;
         return this;
     }

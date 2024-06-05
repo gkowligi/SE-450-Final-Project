@@ -184,15 +184,19 @@ public class Main {
         ShoppingCartBuilder shoppingCartBuilder = shoppingCartManager.getShoppingCartBuilder();
 
         System.out.println("\n Place Order");
-        System.out.println("Enter Customer Name (press Enter when finished): ");
+        System.out.println("Enter Customer First Name");
 
-        String customerName = scanner.nextLine();
+        String customerFirstName = scanner.next();
 
-        System.out.println("Enter Shipping Address (press Enter when finished):");
+        System.out.println("Enter Customer Last Name");
 
-        String shippingAddress = scanner.nextLine();
+        String customerLastName = scanner.next();
 
-        shoppingCartBuilder.setCustomerInfo(customerName, shippingAddress);
+        System.out.println("Enter Shipping Address:");
+
+        String shippingAddress = scanner.next();
+
+        shoppingCartBuilder.setCustomerInfo(customerFirstName, customerLastName, shippingAddress);
 
         shoppingCartBuilder.finalizeOrder();
 

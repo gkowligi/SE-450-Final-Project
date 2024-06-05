@@ -43,14 +43,11 @@ public class UserAuthenticationSystem {
 
     public void addUser(String username, String password) {
         String userToAdd = '\n' + username + ',' + password;
-        try {
-            FileWriter writer = new FileWriter(USERS_FILE_PATH); // Specify the file name
-            writer.write(userToAdd);
-            writer.close(); // Close the writer to save changes
-            System.out.println("Successfully added new user.");
+        try (FileWriter fw = new FileWriter(USERS_FILE_PATH, true)) {
+            fw.write(userToAdd);
+            System.out.println("New User added successfully!");
         } catch (IOException e) {
-            System.out.println("An error occurred while writing to the file.");
-            e.printStackTrace();
+            System.err.println("Error adding new user to the file: " + e.getMessage());
         }
     }
 }
