@@ -196,20 +196,11 @@ public class Main {
 
         shoppingCartBuilder.finalizeOrder();
 
+        shoppingCartBuilder.clearCart();
+
     }
 
 }
-
-
-// user auth
-
-// product catalog
-
-// order processing
-
-// payment processing
-
-// logging
 
 
 

@@ -6,10 +6,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ShoppingCartBuilder {
+
     private List<Product> productList = new ArrayList<>(); // Represents the items in the cart
     private String customerName;
     private String shippingAddress;
 
+    public List<Product> getProductList() {
+        return productList;
+    }
 
     public ShoppingCartBuilder addItem(Product product, int quantity) {
         for (int i = 0; i < quantity; i++) {
